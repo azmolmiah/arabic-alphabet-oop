@@ -1,22 +1,21 @@
-// Global variables
-let currentPageNum = 0;
+// Page constructor - every page will have a current page number, and functions to navigate pages
+class Book {
+  constructor(currentPageNumber) {
+    this.currentPageNumber = currentPageNumber;
+  }
 
-// Page constructor - every page will have a current page number, number of sections, and functions to navigate pages
-function Page(currentPageNumber, numOfSections) {
-  this.currentPageNumber = currentPageNumber;
-  this.numOfSections = numOfSections;
-  this.getNextPage = function () {
-    return (this.currentPageNumber = currentPageNum++);
-  };
-  this.getPrevPage = function () {
-    return (this.currentPageNumber = currentPageNum--);
-  };
+  getNextPage() {
+    return this.currentPageNumber++;
+  }
+  getPrevPage() {
+    return this.currentPageNumber--;
+  }
 }
 
-// UI constructor
-function Letters() {
+// Letter constructor - get all letters dependant on current page, check to see if it has more than one section
+class Letters {
   // Get letters
-  this.getLetters = async function (currentPageNumber) {
+  async getLetters(currentPageNumber) {
     try {
       const letters = await fetch("js/qaida.json");
       const data = await letters.json();
@@ -24,29 +23,33 @@ function Letters() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 }
 
+function UI() {}
+
 // Event Listeners
+const book = new Book(0);
 
 // On Windows or App load first page
 window.addEventListener("load", async () => {
   const letters = new Letters();
-  console.log(await letters.getLetters(currentPageNum));
+  const initLetters = await letters.getLetters(0);
+  console.log(initLetters);
 });
 
 // Get next button
-document.getElementById("nextBtn").addEventListener("click", () => {
-  const nextPage = new Page(currentPageNum, 0);
-  nextPage.getNextPage();
+document.getElementById("nextBtn").addEventListener("click", async () => {
+  const nextPage = book.getNextPage();
   const letters = new Letters();
-  letters.getLetters(nextPage);
+  console.log(await letters.getLetters(nextPage + 1));
 });
 
 // Get prev button
-document.getElementById("prevBtn").addEventListener("click", () => {
-  const nextPage = new Page(currentPageNum, 0);
-  console.log(nextPage.getPrevPage());
+document.getElementById("prevBtn").addEventListener("click", async () => {
+  const prevPage = book.getPrevPage();
+  const letters = new Letters();
+  console.log(await letters.getLetters(prevPage - 1));
 });
 
 // Select Page
