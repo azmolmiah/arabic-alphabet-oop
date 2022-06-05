@@ -14,7 +14,6 @@ class Book {
 
 // Letter constructor - get all letters dependant on current page, check to see if it has more than one section
 class Letters {
-  // Get letters
   async getLetters(currentPageNumber) {
     try {
       const letters = await fetch("js/qaida.json");
@@ -26,30 +25,37 @@ class Letters {
   }
 }
 
-function UI() {}
+class Page {
+  constructor(letters) {
+    this.letters = letters;
+    console.log(this.letters);
+  }
+}
 
-// Event Listeners
+// Instantiate book object
 const book = new Book(0);
 
 // On Windows or App load first page
 window.addEventListener("load", async () => {
   const letters = new Letters();
-  const initLetters = await letters.getLetters(0);
+  const initLetters = await letters.getLetters(book.currentPageNumber);
   console.log(initLetters);
 });
 
-// Get next button
+// Next button
 document.getElementById("nextBtn").addEventListener("click", async () => {
   const nextPage = book.getNextPage();
   const letters = new Letters();
-  console.log(await letters.getLetters(nextPage + 1));
+  const nextLetters = await letters.getLetters(nextPage + 1);
+  return new Page(nextLetters);
 });
 
-// Get prev button
+// Prev button
 document.getElementById("prevBtn").addEventListener("click", async () => {
   const prevPage = book.getPrevPage();
   const letters = new Letters();
-  console.log(await letters.getLetters(prevPage - 1));
+  const prevLetters = await letters.getLetters(prevPage - 1);
+  return new Page(prevLetters);
 });
 
 // Select Page
