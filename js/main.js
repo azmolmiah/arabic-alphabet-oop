@@ -23,12 +23,23 @@ class Letters {
       console.log(error);
     }
   }
-}
 
-class Page {
-  constructor(letters) {
-    this.letters = letters;
-    console.log(this.letters);
+  setLetters(letters) {
+    const lettersOutput = document.getElementById("letters-output");
+    while (lettersOutput.firstChild) {
+      lettersOutput.removeChild(lettersOutput.firstChild);
+    }
+    letters.map((letter) => {
+      if (letter.type == "title") {
+        lettersOutput.innerHTML += `
+        <img src="${letter.image}" alt="${letter.name}" style="width:100%;height:auto;"/>
+      `;
+      } else {
+        lettersOutput.innerHTML += `
+        <img src="${letter.image}" alt="${letter.name}" style="display:flex;width:50%;height:70px;"/>
+      `;
+      }
+    });
   }
 }
 
@@ -39,7 +50,7 @@ const book = new Book(0);
 window.addEventListener("load", async () => {
   const letters = new Letters();
   const initLetters = await letters.getLetters(book.currentPageNumber);
-  console.log(initLetters);
+  return letters.setLetters(initLetters);
 });
 
 // Next button
@@ -47,7 +58,7 @@ document.getElementById("nextBtn").addEventListener("click", async () => {
   const nextPage = book.getNextPage();
   const letters = new Letters();
   const nextLetters = await letters.getLetters(nextPage + 1);
-  return new Page(nextLetters);
+  return letters.setLetters(nextLetters);
 });
 
 // Prev button
@@ -55,7 +66,7 @@ document.getElementById("prevBtn").addEventListener("click", async () => {
   const prevPage = book.getPrevPage();
   const letters = new Letters();
   const prevLetters = await letters.getLetters(prevPage - 1);
-  return new Page(prevLetters);
+  return letters.setLetters(prevLetters);
 });
 
 // Select Page

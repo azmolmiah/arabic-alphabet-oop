@@ -2,6 +2,11 @@
   "letters": [
     [
       {
+        "name": "firstpagetitle",
+        "image": "img/firstpagetitle.png",
+        "type": "title"
+      },
+      {
         "name": "alif",
         "image": "img/alif.png"
       },
@@ -70,7 +75,7 @@
         "image": "img/zwa.png"
       },
       {
-        "name": "Ghayn",
+        "name": "ayn",
         "image": "img/ayn.png"
       },
       {
@@ -102,7 +107,7 @@
         "image": "img/noon.png"
       },
       {
-        "name": "Noon",
+        "name": "Woaw",
         "image": "img/woaw.png"
       },
       {
@@ -118,7 +123,7 @@
         "image": "img/yaa.png"
       },
       {
-        "name": "Yaa",
+        "name": "Ya",
         "image": "img/ya.png"
       }
     ],
