@@ -32,11 +32,11 @@ class Letters {
     letters.map((letter) => {
       if (letter.type == "title") {
         lettersOutput.innerHTML += `
-        <img src="${letter.image}" alt="${letter.name}" style="width:100%;height:auto;"/>
+        <img src="${letter.image}" alt="${letter.name}" style="width: 100%; height:auto;"/>
       `;
       } else {
         lettersOutput.innerHTML += `
-        <img src="${letter.image}" alt="${letter.name}" style="display:flex;width:50%;height:70px;"/>
+        <img src="${letter.image}" alt="${letter.name}" class="letters"/>
       `;
       }
     });
