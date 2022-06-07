@@ -1,11 +1,25 @@
 .container {
-    max-width: 600px !important;
+    max-width: 500px !important;
+    max-height: 572px !important;
+}
+
+#letters-output {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+    flex-wrap: wrap;
+    border: 1px solid black;
+}
+
+#letters-output img {
+    flex: auto;
+    border: 1px solid black;
+    overflow: hidden;
 }
 
 .letters {
-    float:right; 
-    width: 96px; 
-    height: auto;
+    width:  auto; 
+    height: 85px;
 }
 
  /* Media Queries */

@@ -30,15 +30,9 @@ class Letters {
       lettersOutput.removeChild(lettersOutput.firstChild);
     }
     letters.map((letter) => {
-      if (letter.type == "title") {
-        lettersOutput.innerHTML += `
-        <img src="${letter.image}" alt="${letter.name}" style="width: 100%; height:auto;"/>
-      `;
-      } else {
-        lettersOutput.innerHTML += `
+      lettersOutput.innerHTML += `
         <img src="${letter.image}" alt="${letter.name}" class="letters"/>
       `;
-      }
     });
   }
 }
